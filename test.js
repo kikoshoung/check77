@@ -1,3 +1,7 @@
-var gpio = require('pi-gpio');
+var gpio = require("pi-gpio");
 
-console.log(gpio);
+gpio.open(11, "output", function(err) {       
+    gpio.write(11, 1, function() {            
+        gpio.close(11);            
+    });
+});
