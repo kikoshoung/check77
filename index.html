@@ -22,7 +22,7 @@
 			function setUserMedia(){
 				var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 				if(getUserMedia){
-					getUserMedia('video', function(stream){
+					getUserMedia({video: true}, function(stream){
 						video.src = stream;
 					}, function(err){
 						body.innerHTML = 'An error occurred: [CODE ' + err.code + ']';
