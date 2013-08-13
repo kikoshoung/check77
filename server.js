@@ -1,12 +1,6 @@
 
 var http = require("http"),
-        fs = require('fs'),
-        camera = require('camera');
-
-webcam = camera.createStream();
-
-console.log(webcam);
-
+        fs = require('fs');
 
 fs.readFile(__dirname + '/index.html', 'utf-8', function(err, html){
         console.log(__dirname);
