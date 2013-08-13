@@ -1,18 +1,18 @@
 var gpio = require("pi-gpio"),
-	pins = [11, 12, 13, 15],
+	pins = [11, 12, 7, 15],
 	pinIndex = 0,
 	timer;
-
+pins.reverse();
 setPinsIO();
 setPinsSignal();
-setInterval(setPinsSignal, 500);
+setInterval(setPinsSignal, 0.05);
 
 function getSignal(){
 	var res = [0, 0, 0, 0];
 	if(pinIndex >= pins.length) pinIndex = 0;
 	res[pinIndex] = 1;
 	pinIndex++;
-	// console.log(res);
+//	console.log(res);
 	return res;
 }
 
