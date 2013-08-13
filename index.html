@@ -1,62 +1,10 @@
 <!doctype html>
 <html>
-<head>
+	<head>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
-		<meta name="viewport" content="width=device-width,user-scalable=no">
 		<title>Check Seven</title>
 	</head>
 	<body>
-		<canvas id="canvas">Sorry, your browser does not support Canvas.</canvas>
-		<video autoplay id="video">Sorry, your browser does not support Video.</video>
-		<script type="text/javascript">
-			var body = document.getElementsByTagName('body')[0],
-				webSocketHost = 'ws://192.168.1.106:8081',
-				video = document.getElementById('video'),
-				canvas = document.getElementById('canvas'),
-				ctx = canvas.getContext('2d'),
-				ws;
-
-			setUserMedia();
-			setWebSocket();
-
-			function setUserMedia(){
-				var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-				if(getUserMedia){
-					getUserMedia({video: true}, function(stream){
-						video.src = stream;
-					}, function(err){
-						body.innerHTML = 'An error occurred: [CODE ' + err.code + ']';
-					});
-				} else {
-					body.innerHTML = 'Native web camera streaming is not supported in your browser!';
-				}
-			}
-			function setWebSocket(){
-				if('WebSocket' in window){
-					connectWS(webSocketHost);
-				} else {
-					body.innerHTML = 'WebSocket is not supported in your browser!';
-				}
-			}
-			function connectWS(host){
-				ws = new WebSocket(host);
-				ws.onopen(function(){
-					console.log('WebSocket connected.');
-					refreshCanvas();
-				});
-				ws.onclose(function(){
-					console.log('WebSocket closed.');
-				});
-				ws.onerror(function(err){
-					throw 'ERROR: '+ err.data;
-				});
-			}
-			function refreshCanvas(){
-				ctx.drawImage(video, 0, 0, 320, 240);
-				setTimeout(function(){
-					refreshCanvas();
-				}, 100);
-			}
-		</script>
+		<iframe id="video-frame" width="320" height="240" src="http://192.168.1.106:8081"></iframe>
 	</body>
 </html>
