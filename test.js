@@ -4,14 +4,15 @@ var gpio = require("pi-gpio"),
 	timer;
 
 setPinsIO();
+setPinsSignal();
 setInterval(setPinsSignal, 500);
 
 function getSignal(){
 	var res = [0, 0, 0, 0];
-	if(pinIndex > pins.length) pinIndex = 0;
+	if(pinIndex >= pins.length) pinIndex = 0;
 	res[pinIndex] = 1;
 	pinIndex++;
-	console.log(res);
+	// console.log(res);
 	return res;
 }
 
@@ -29,7 +30,7 @@ function setPinsSignal(){
 }
 
 function shutdown(){
-	for(var i = 0; i < pins.length; i++)}{
+	for(var i = 0; i < pins.length; i++){
 	    gpio.write(pins[i], 0, function(){});
 	}
 }
